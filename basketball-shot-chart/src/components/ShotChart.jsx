@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "../App.css";
 
 const ShotChart = () => {
-  // court constants
   const courtWidth = 600;
   const courtHeight = 500;
-  const hoopX = courtWidth / 2; // center X
-  const hoopY = 45; // hoop position
-  const threeRadius = 220; // radius for 3PT arc
+  const hoopX = courtWidth / 2; 
+  const hoopY = 45; 
+  const threeRadius = 120; 
+  const freeThrowRadius = 80; // semicircle radius for free throw line
 
   const [shots, setShots] = useState([]);
   const [shotType, setShotType] = useState("made");
@@ -37,7 +37,7 @@ const ShotChart = () => {
           {/* Court background */}
           <rect x="0" y="0" width={courtWidth} height={courtHeight} fill="#f5deb3" />
 
-          {/* Painted area (bigger than before) */}
+          {/* Painted area */}
           <rect
             x={(courtWidth - 160) / 2}
             y={30}
@@ -49,29 +49,30 @@ const ShotChart = () => {
             strokeWidth="2"
           />
 
-          {/* Three-point line: straight sidelines + arc */}
+          {/* Free throw semicircle (top of key, rotated 180°) */}
+          <path
+            d={`
+              M ${hoopX - freeThrowRadius} 220
+              A ${freeThrowRadius} ${freeThrowRadius} 0 0 0 ${hoopX + freeThrowRadius} 220
+            `}
+            fill="none"
+            stroke="#333"
+            strokeWidth="2"
+          />
+
+
+          {/* Three-point line */}
           {/* Left sideline */}
-          <line
-            x1={hoopX - 220}
-            y1={courtHeight-100}
-            x2={hoopX - 220}
-            y2={hoopY + 10}
-            stroke="#333"
-            strokeWidth="3"
-          />
+          
+          <line x1="50" y1="50" x2="50" y2="450" stroke="#333" strokeWidth="3" />
+          
           {/* Right sideline */}
-          <line
-            x1={hoopX + 220}
-            y1={courtHeight -100}
-            x2={hoopX + 220}
-            y2={hoopY + 10}
-            stroke="#333"
-            strokeWidth="3"
-          />
+          <line x1="550" y1="50" x2="550" y2="450" stroke="#333" strokeWidth="3" />
+
           {/* Arc */}
           <path
-            d={`M ${hoopX + 220} ${hoopY - 10}
-               A ${threeRadius} ${threeRadius} 0 0 1 ${hoopX - 220} ${hoopY - 10}`}
+            d={`M ${hoopX - 220} ${hoopY + 10}
+               A ${threeRadius} ${threeRadius} 0 0 0 ${hoopX + 220} ${hoopY + 10}`}
             fill="none"
             stroke="#333"
             strokeWidth="3"
