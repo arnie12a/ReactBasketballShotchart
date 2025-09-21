@@ -63,20 +63,39 @@ const ShotChart = () => {
 
           {/* Three-point line */}
           {/* Left sideline */}
-          
-          <line x1="50" y1="50" x2="50" y2="450" stroke="#333" strokeWidth="3" />
-          
+          <line
+            x1="85"
+            y1={hoopY + 8}
+            x2="85"
+            y2="220"
+            stroke="#333"
+            strokeWidth="3"
+          />
+
           {/* Right sideline */}
+          <line
+            x1="515"
+            y1={hoopY + 8}
+            x2="515"
+            y2="220"
+            stroke="#333"
+            strokeWidth="3"
+          />
+
+          {/* Three-point line */} {/* Left sideline */} 
+          <line x1="50" y1="50" x2="50" y2="450" stroke="#333" strokeWidth="3" /> 
+          {/* Right sideline */} 
           <line x1="550" y1="50" x2="550" y2="450" stroke="#333" strokeWidth="3" />
 
-          {/* Arc */}
+          {/* Arc that connects the two sidelines */}
           <path
-            d={`M ${hoopX - 220} ${hoopY + 10}
-               A ${threeRadius} ${threeRadius} 0 0 0 ${hoopX + 220} ${hoopY + 10}`}
+            d={`M 50 220
+              A 250 250 0 0 0 550 220`}
             fill="none"
             stroke="#333"
             strokeWidth="3"
           />
+
 
           {/* Backboard */}
           <rect
